@@ -14,3 +14,5 @@ Screenshots:
 ![Image8](http://i.imgur.com/JgigxSQ.png)
 ![Image9](http://i.imgur.com/C3ZBDAy.png)
 ![Image10](http://i.imgur.com/Re9XpSN.png)
+![Image11](http://i.imgur.com/aX3pvR2.png)
+![Image12](http://i.imgur.com/jHvZaYk.png)
