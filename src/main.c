@@ -18,13 +18,13 @@ int main() {
 	}
 
 	glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	GLFWwindow* window;
-	window = glfwCreateWindow(1024, 768, "Hello, World", NULL, NULL);
+	window = glfwCreateWindow(1920, 1080, "Hello, World", NULL, NULL);
 	if (!window) {
 		fprintf(stderr, "glfw: failed to create window\n");
 		glfwTerminate();
@@ -43,7 +43,7 @@ int main() {
 	// Pre loop
 	////////
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-	glfwSetCursorPos(window, 1024/2, 768/2);
+	glfwSetCursorPos(window, 1920/2, 1080/2);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -109,17 +109,21 @@ int main() {
 	cube c1;
 	cube c2;
 
-	int nc = 1024; // Number of cubes
+	int nc = 16384; // Number of cubes
 	cube cubes[nc];
 
-	int inc = 2; // increment
-	float bound = 16.0f * inc; // 16, 2; 64, 4; 256, 8; 1024, 16; 16384, 64
+	float inc = 3; // increment
+	printf("%f\n", pow(nc, 0.5)/2);
+	float bound = pow(nc, 0.5)/2 * inc; // 16, 2; 64, 4; 256, 8; 1024, 16; 16384, 64
 	for (int i = 0; i < 108; i += 3) {
 		int j = 0;
 		float y;
 		for (float x = -bound; x < bound; x += inc) {
 			for (float z = -bound; z < bound; z += inc) {
-				y = -4 * log(fabs(z) + fabs(x) + 1) / log(1.8); // log(x) / log(b) same as log(b, x)
+				// Testing:
+				// https://www.wolframalpha.com/input/?i=plot+y%3D%28sin%28x%29%2Bcos%28z%29%29%5E2
+				y = sin(x) + cos(z);
+				y = 5*y*y;
 				cubes[j].vertices[i  ] = tmp_vertices[i  ] + x; // x
 				cubes[j].vertices[i+1] = tmp_vertices[i+1] + y; // y
 				cubes[j].vertices[i+2] = tmp_vertices[i+2] + z; // z

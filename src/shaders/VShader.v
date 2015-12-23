@@ -9,7 +9,7 @@ void main() {
 	vec4 v = vec4(pos, 1);
 	gl_Position = MVP * v;
 
-	frag_color[0] = (abs(pos.x) / 32.0);
-	frag_color[1] = (abs(pos.z) / 32.0);
-	frag_color[2] = 1;
+	frag_color[0] = mod(int(abs(pos.z) * 2), 255)/255;
+	frag_color[1] = mod(int(abs(pos.y) * 256), 255)/255;
+	frag_color[2] = mod(int(abs(pos.x) * 65536), 255)/255;
 }
