@@ -109,21 +109,17 @@ int main() {
 	cube c1;
 	cube c2;
 
-	int nc = 16384; // Number of cubes
+	int nc = pow(2, 14); // Number of cubes
 	cube cubes[nc];
 
 	float inc = 3; // increment
-	printf("%f\n", pow(nc, 0.5)/2);
 	float bound = pow(nc, 0.5)/2 * inc; // 16, 2; 64, 4; 256, 8; 1024, 16; 16384, 64
 	for (int i = 0; i < 108; i += 3) {
 		int j = 0;
 		float y;
 		for (float x = -bound; x < bound; x += inc) {
 			for (float z = -bound; z < bound; z += inc) {
-				// Testing:
-				// https://www.wolframalpha.com/input/?i=plot+y%3D%28sin%28x%29%2Bcos%28z%29%29%5E2
-				y = sin(x) + cos(z);
-				y = 5*y*y;
+				y = -sqrt(pow(x, 2) + pow(z, 2));
 				cubes[j].vertices[i  ] = tmp_vertices[i  ] + x; // x
 				cubes[j].vertices[i+1] = tmp_vertices[i+1] + y; // y
 				cubes[j].vertices[i+2] = tmp_vertices[i+2] + z; // z
